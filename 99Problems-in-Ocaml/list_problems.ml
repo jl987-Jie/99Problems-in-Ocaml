@@ -37,3 +37,7 @@ let at kth lst =
 (*
  * Find the number of elements of a list. 
  *)
+let length lst =
+    let h acc elm =
+        acc + 1 in
+    List.fold_left h 0 lst
