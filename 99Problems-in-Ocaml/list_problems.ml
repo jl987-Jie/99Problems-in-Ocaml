@@ -41,3 +41,11 @@ let length lst =
     let h acc elm =
         acc + 1 in
     List.fold_left h 0 lst
+
+(*
+ * Reverse a list. 
+ *)
+let rev lst =
+    let h acc elm =
+        elm :: acc in
+    List.fold_left h [] lst
