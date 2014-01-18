@@ -26,4 +26,14 @@ let rec last lst =
  *)
 let last_two lst = failwith "implement me"
 
+(* 
+ * Find the k'th element of a list. 
+ *)
+let at kth lst =
+    let h (acc, pos) elm =
+        if pos = kth then (Some elm, pos + 1) else (acc, pos + 1) in
+    fst (List.fold_left h (None, 1) lst)
 
+(*
+ * Find the number of elements of a list. 
+ *)
