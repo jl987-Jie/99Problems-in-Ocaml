@@ -49,3 +49,8 @@ let rev lst =
     let h acc elm =
         elm :: acc in
     List.fold_left h [] lst
+
+(*
+ * Find out whether a list is a palindrome. 
+ *)
+let is_palindrome lst = lst = rev lst
