@@ -54,3 +54,22 @@ let rev lst =
  * Find out whether a list is a palindrome. 
  *)
 let is_palindrome lst = lst = rev lst
+
+(*
+ * Flatten a nested list structure.
+ * There is no nested list type in OCaml, so we need to define one
+ * first. A node of a nested list is either an element, or a list of
+ * nodes. 
+ * ex:
+ * # flatten [ One "a" ; Many [ One "b" ; Many [ One "c" ; One "d" ] ; One "e" ] ];;
+ * - : string list = ["a"; "b"; "c"; "d"; "e"]
+ *)
+type 'a node = One of 'a | Many of 'a node list
+
+let rec flatten lst =
+    let h accu elm =
+        match elm with
+        | One e -> accu @ [e]
+        | Many l -> accu @ flatten l in
+    List.fold_left h [] lst
+
