@@ -20,4 +20,10 @@ let rec last lst =
     | hd :: [] -> Some hd
     | hd :: tl -> last tl
 
+(*
+ * Find the last but one (last and penultimate) 
+ * elements of a list. 
+ *)
+let last_two lst = failwith "implement me"
+
 
