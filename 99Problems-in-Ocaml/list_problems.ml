@@ -73,3 +73,16 @@ let rec flatten lst =
         | Many l -> accu @ flatten l in
     List.fold_left h [] lst
 
+(*
+ * Eliminate consecutive duplicates of list elements.
+ * eg: 
+ * # compress ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"e";"e";"e";"e"];;
+ * - : string list = ["a"; "b"; "c"; "a"; "d"; "e"]
+ *)
+let compress lst =
+    match lst with
+    | [] -> []
+    | hd :: tl ->
+        let h (prev, accu) elm =
+            if elm = prev then (prev, accu) else (elm, accu @ [elm]) in
+        snd(List.fold_left h (hd, [hd]) tl)
