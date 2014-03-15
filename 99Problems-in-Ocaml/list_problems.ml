@@ -24,7 +24,22 @@ let rec last lst =
  * Find the last but one (last and penultimate) 
  * elements of a list. 
  *)
-let last_two lst = failwith "implement me"
+let last_two lst = 
+    let len = List.length lst in
+    if len < 2 then
+        None
+    else
+        let h (cur_len, result) elm =
+            if cur_len = len - 1 || cur_len = len then
+                (cur_len + 1, elm :: result)
+            else
+                (cur_len + 1, result) in 
+        let res = snd (List.fold_left h (1, []) lst) in
+        match res with
+        | [] -> None
+        | hd :: tl -> Some (hd, List.hd tl)
+
+
 
 (* 
  * Find the k'th element of a list. 
@@ -86,3 +101,15 @@ let compress lst =
         let h (prev, accu) elm =
             if elm = prev then (prev, accu) else (elm, accu @ [elm]) in
         snd(List.fold_left h (hd, [hd]) tl)
+
+(*
+ * Pack consecutive duplicates of list elements into sublists. (medium)
+ * eg:
+ * # pack ["a";"a";"a";"a";"b";"c";"c";"a";"a";"d";"d";"e";"e";"e";"e"];;
+   - : string list list =
+   [["a"; "a"; "a"; "a"]; ["b"]; ["c"; "c"]; ["a"; "a"]; ["d"; "d"];
+   ["e"; "e"; "e"; "e"]]
+ *)
+let pack lst =
+    
+
