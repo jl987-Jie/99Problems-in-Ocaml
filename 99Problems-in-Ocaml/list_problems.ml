@@ -110,6 +110,23 @@ let compress lst =
    [["a"; "a"; "a"; "a"]; ["b"]; ["c"; "c"]; ["a"; "a"]; ["d"; "d"];
    ["e"; "e"; "e"; "e"]]
  *)
-let pack lst =
-    
+let pack lst = 
+    let len = List.length lst in
+    match lst with
+    | [] -> []
+    | hd :: tl ->
+        let h (prev, accu, same_lst, cur_pos) elm =
+            (* when element is same as previous element, add to same_lst *)
+            if elm = prev then 
+                if cur_pos = len - 1 then
+                    (* append the last element *)
+                    (elm, accu @ [same_lst @ [elm]], same_lst, cur_pos)
+                else
+                    (* add to same_lst *)
+                    (elm, accu, same_lst @ [elm], cur_pos + 1) 
+            else 
+            (* element is not the same as the previous, so add the same_lst to accu *)
+                (elm, accu @ [same_lst], [elm], cur_pos + 1) in
+        match List.fold_left h (hd, [], [], 0) lst with
+        | (_, s, _, _) -> s
 
